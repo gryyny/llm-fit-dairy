@@ -1,0 +1,1 @@
+ALTER TABLE "catalogue_record" ADD COLUMN "data_type" text;

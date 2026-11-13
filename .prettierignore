@@ -1,0 +1,7 @@
+# Documentation is reviewed with the documentation checks in AGENTS.md, not reformatted.
+*.md
+pnpm-lock.yaml
+dist/
+coverage/
+apps/api/drizzle/meta/
+probes/

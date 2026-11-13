@@ -1,0 +1,1 @@
+ALTER TABLE "day_targets" ADD COLUMN "version" integer DEFAULT 1 NOT NULL;

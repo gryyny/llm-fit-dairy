@@ -1,0 +1,9 @@
+packages:
+  - apps/*
+
+# AR-7: refuse any direct or transitive package version published less than 14 days ago.
+minimumReleaseAge: 20160
+
+# esbuild's install script only verifies its platform binary; drizzle-kit and Vite run without it.
+ignoredBuiltDependencies:
+  - esbuild

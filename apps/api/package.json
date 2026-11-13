@@ -1,0 +1,36 @@
+{
+  "name": "@food-diary/api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/main.js",
+    "db:generate": "drizzle-kit generate"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.3.0",
+    "@nestjs/common": "12.3.2",
+    "@nestjs/core": "12.3.2",
+    "@nestjs/platform-express": "12.3.2",
+    "drizzle-orm": "0.45.3",
+    "firebase-admin": "14.5.0",
+    "pg": "8.23.1",
+    "pg-copy-streams": "7.0.0",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2",
+    "saxes": "6.0.0",
+    "yauzl": "3.4.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.3.0",
+    "@types/express": "5.0.6",
+    "@types/pg": "8.23.1",
+    "@types/pg-copy-streams": "1.2.5",
+    "@types/yauzl": "3.4.0",
+    "drizzle-kit": "0.31.11",
+    "vitest": "5.0.3"
+  }
+}

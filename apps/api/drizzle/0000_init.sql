@@ -1,0 +1,1 @@
+-- Baseline for the migration history; tables arrive with the portions that need them.

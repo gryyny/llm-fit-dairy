@@ -1,0 +1,22 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "food-diary": {
+      "type": "streamable-http",
+      "url": "https://gryyny.duckdns.org/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "provided",
+              "clientId": "chatgpt",
+              "tokenEndpointAuthMethod": "client_secret_basic"
+            },
+            "baseScopes": ["diary"]
+          }
+        }
+      }
+    }
+  }
+}

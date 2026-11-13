@@ -1,0 +1,99 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "food-diary",
+  "version": "2.3.0",
+  "description": "Keep a food diary in ChatGPT: log meals, automatically retain reusable foods and recipes, and keep optional body details, agreed goals and weights for the profiles that joined.",
+  "author": {
+    "name": "Andrii Hrynchuk",
+    "url": "https://gryyny.duckdns.org"
+  },
+  "homepage": "https://gryyny.duckdns.org",
+  "keywords": ["food", "nutrition", "diary", "weight"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Food diary",
+        "shortDescription": "Log meals, targets and weight",
+        "longDescription": "For adults aged 18 and over. Tell ChatGPT what you ate and Food diary saves it: each food with its amount, nutrition values, one source (a label, a food database record or an estimate) and a note. Reusable foods and complete recipes are saved automatically. Your meals, usual foods, recipes, optional body details, agreed targets and weigh-ins stay available in every new chat and on the diary website.\n\nChatGPT does the food understanding and arithmetic; Food diary stores and returns records and never invents values. Unknown values stay unknown rather than zero. Corrections change only the entry you correct, and a retried save is never stored twice.\n\nYou start with your own profile. To keep diaries for several people in one chat, ask ChatGPT to add a person: they get a one-time link, sign in with their own account and approve. Profiles stay independent and private to each person. Food lookups use the Ciqual, BLS, USDA FoodData Central and Open Food Facts datasets.\n\nFood, nutrition, weight and optional body/goal records can be health information. They are stored only to show them to you and ChatGPT, and each person can delete all their data on the diary website. Food diary does not give medical advice.",
+        "developerName": "Andrii Hrynchuk",
+        "category": "Healthcare",
+        "capabilities": [
+          "Log and correct meals",
+          "Automatically retain and reuse foods and recipes",
+          "Keep optional body details, agreed goals and weight",
+          "Add other people's profiles with their approval",
+          "Look up foods in public datasets"
+        ],
+        "websiteURL": "https://gryyny.duckdns.org/",
+        "supportURL": "https://gryyny.duckdns.org/support",
+        "privacyPolicyURL": "https://gryyny.duckdns.org/privacy",
+        "termsOfServiceURL": "https://gryyny.duckdns.org/terms",
+        "defaultPrompt": [
+          "I had porridge with milk for breakfast.",
+          "What did I eat yesterday?",
+          "My weight this morning was 74.6 kg."
+        ],
+        "brandColor": "#7B2A57",
+        "brandColorDark": "#E08AB6",
+        "composerIcon": "./assets/logo.svg",
+        "logo": "./assets/logo.svg"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Start with an empty reviewer diary. Log a breakfast, using catalogue values when suitable or clearly marked estimates; no label was supplied. Run the next two cases in the same conversation, in order.",
+              "prompt": "I had 60 g of rolled oats with 200 ml of semi-skimmed milk for breakfast today.",
+              "tools_triggered": "list_saved, search_catalogue, read_catalogue_record, save_meal",
+              "expected_behavior": "Saves one breakfast meal for today in the reviewer's only profile with 60 g oats and 200 ml milk. Each entry has its eaten-amount values, one honest source and a note identifying the chosen food and assumptions. Confirms the values from the returned record; missing nutrients remain unknown. If no suitable catalogue record is found, explains the estimate instead of fabricating a record or label. Retains reusable foods atomically using new_foods/food_ref when no saved definition fits, and reports retention only from returned retained_foods. A user confirmation alone never changes an estimate into label evidence."
+            },
+            {
+              "description": "After the breakfast case, read back the same day.",
+              "prompt": "What did I eat today?",
+              "tools_triggered": "read_diary",
+              "expected_behavior": "Lists today's saved meals and entries with their values and sources; values that were not recorded are described as unknown, not zero."
+            },
+            {
+              "description": "After reading the breakfast, correct only the oats in the same conversation.",
+              "prompt": "Actually the oats were 80 g, not 60 g.",
+              "tools_triggered": "read_diary, update_entry",
+              "expected_behavior": "Updates only the oats entry with the new quantity and recalculated values; the milk entry is unchanged."
+            },
+            {
+              "description": "Invite another person's profile",
+              "prompt": "Add my partner Sam to my food diary.",
+              "tools_triggered": "add_profile",
+              "expected_behavior": "Returns a one-time link and explains that Sam must open it within 30 minutes, sign in with Sam's own account and approve before anything of Sam's is reachable."
+            },
+            {
+              "description": "Record a weight",
+              "prompt": "My weight this morning was 74.6 kg.",
+              "tools_triggered": "save_weight",
+              "expected_behavior": "Saves 74.6 kg for today's date in the user's profile and confirms it from the returned record."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Alex has not joined this review connection. Explain that Alex's own sign-in and approval are required; do not invent records or read an unlinked profile. list_profiles may check the available profiles; do not call read_diary for Alex or create a profile on Alex's behalf.",
+              "prompt": "Show me what my friend Alex logged in their own Food diary profile."
+            },
+            {
+              "description": "Explain that deleting all personal data is done by the signed-in person in website Settings. Do not call delete_record repeatedly or claim that the account was deleted. The account-deletion operation is not exposed to chat.",
+              "prompt": "Delete all my diaries and my account."
+            },
+            {
+              "description": "Explain that ordering or paying for food is unsupported. Do not invoke diary write tools, attempt a purchase or claim that an order was placed.",
+              "prompt": "Order me a large pizza for delivery."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "Food diary does not sell products or process payments."
+      },
+      "publication": {
+        "release_notes": "Food logging with automatic reusable foods and recipes, optional body details and agreed goal explanations, chat-only profile changes, calorie and macro progress, refreshed histories, and an English/Ukrainian read-only diary website. Google or email/password sign-in and owner-approved connections remain.",
+        "countries": []
+      }
+    }
+  }
+}

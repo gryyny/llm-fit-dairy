@@ -1,0 +1,12 @@
+{$PUBLIC_HOSTNAME} {
+	encode gzip
+	# AC-6 option 3: serve Firebase's auth handler from our own hostname.
+	handle /__/auth/* {
+		reverse_proxy https://{$FIREBASE_PROJECT_ID}.firebaseapp.com {
+			header_up Host {upstream_hostport}
+		}
+	}
+	handle {
+		reverse_proxy app:3000
+	}
+}

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TABLE>
+   <ALIM>
+      <alim_code> 99001 </alim_code>
+      <alim_nom_fr> Flocons d&apos;avoine test </alim_nom_fr>
+      <alim_nom_eng> Test oat flakes </alim_nom_eng>
+      <alim_nom_sci missing=" " />
+      <alim_grp_code> 03 </alim_grp_code>
+   </ALIM>
+   <ALIM>
+      <alim_code> 99002 </alim_code>
+      <alim_nom_fr> Bouillon test, prêt à consommer </alim_nom_fr>
+      <alim_nom_eng> Test broth, ready to eat </alim_nom_eng>
+   </ALIM>
+</TABLE>

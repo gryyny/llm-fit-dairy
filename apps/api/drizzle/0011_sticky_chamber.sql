@@ -1,0 +1,1 @@
+ALTER TABLE "body_contexts" ADD COLUMN "date_of_birth" date;

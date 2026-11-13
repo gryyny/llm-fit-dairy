@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TABLE>
+   <COMPO>
+      <alim_code> 99001 </alim_code>
+      <const_code> 328 </const_code>
+      <teneur> 367 </teneur>
+      <min missing=" " />
+      <max missing=" " />
+      <code_confiance> A </code_confiance>
+      <source_code> 1 </source_code>
+   </COMPO>
+   <COMPO>
+      <alim_code> 99001 </alim_code>
+      <const_code> 400 </const_code>
+      <teneur> 9,7 </teneur>
+      <min>         8,7 </min>
+      <max>         10,4 </max>
+   </COMPO>
+   <COMPO>
+      <alim_code> 99001 </alim_code>
+      <const_code> 10004 </const_code>
+      <teneur> &lt; 0,01 </teneur>
+   </COMPO>
+   <COMPO>
+      <alim_code> 99002 </alim_code>
+      <const_code> 400 </const_code>
+      <teneur> traces </teneur>
+   </COMPO>
+   <COMPO>
+      <alim_code> 99002 </alim_code>
+      <const_code> 328 </const_code>
+      <teneur missing=" " />
+   </COMPO>
+</TABLE>
